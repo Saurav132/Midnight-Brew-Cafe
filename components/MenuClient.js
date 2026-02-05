@@ -10,10 +10,16 @@ export default function MenuClient({ items }) {
 
   const categories = [
     { value: 'all', label: 'All Items', icon: UtensilsCrossed },
-    { value: 'coffee', label: 'Coffee', icon: Coffee },
-    { value: 'snacks', label: 'Snacks', icon: Sandwich },
-    { value: 'desserts', label: 'Desserts', icon: Cake },
-    { value: 'meals', label: 'Meals', icon: UtensilsCrossed },
+
+  { value: 'coffee', label: 'Coffee', icon: Coffee },
+  { value: 'snacks', label: 'Snacks', icon: Sandwich },
+  { value: 'desserts', label: 'Desserts', icon: Cake },
+  { value: 'meals', label: 'Meals', icon: UtensilsCrossed },
+
+  { value: 'drinks', label: 'Drinks', icon: Coffee },
+  { value: 'combos', label: 'Combos', icon: UtensilsCrossed },
+  { value: 'seasonal', label: 'Seasonal', icon: Cake },
+  { value: 'specials', label: 'Specials', icon: UtensilsCrossed },
   ]
 
   const filtered =
@@ -24,21 +30,28 @@ export default function MenuClient({ items }) {
   return (
     <>
       {/* Tabs */}
-      <div className="mb-12 flex justify-center">
-        <Tabs value={activeCategory} onValueChange={setActiveCategory}>
-          <TabsList className="grid grid-cols-5 bg-zinc-900 border border-amber-900/20">
-            {categories.map(c => {
-              const Icon = c.icon
-              return (
-                <TabsTrigger key={c.value} value={c.value}>
-                  <Icon className="h-4 w-4 mr-1" />
-                  {c.label}
-                </TabsTrigger>
-              )
-            })}
-          </TabsList>
-        </Tabs>
-      </div>
+     <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+  {categories.map((cat) => {
+    const Icon = cat.icon
+    const active = activeCategory === cat.value
+
+    return (
+      <button
+        key={cat.value}
+        onClick={() => setActiveCategory(cat.value)}
+        className={`flex items-center gap-2 px-4 py-2 rounded-full border transition
+          ${active
+            ? "bg-amber-600 text-white border-amber-500"
+            : "bg-zinc-900 text-amber-100 border-amber-900/30 hover:bg-zinc-800"
+          }`}
+      >
+        <Icon className="h-4 w-4" />
+        {cat.label}
+      </button>
+    )
+  })}
+</div>
+
 
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

@@ -14,11 +14,36 @@ export default function ContactPage() {
     message: ''
   })
 
-  const handleSubmit = (e) => {
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Contact form:', formData)
-    alert('Thanks for your message! We\'ll get back to you soon.')
-    setFormData({ name: '', email: '', message: '' })
+    setLoading(true)
+
+    try {
+      const res = await fetch("https://formspree.io/f/xwvneoep", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          _subject: "New Midnight Brew Cafe Contact Message"
+        }),
+      })
+
+      if (res.ok) {
+        alert("✅ Message sent successfully!")
+        setFormData({ name: '', email: '', message: '' })
+      } else {
+        alert("❌ Failed to send message. Try again.")
+      }
+    } catch (err) {
+      alert("⚠️ Network error. Please try again.")
+    }
+
+    setLoading(false)
   }
 
   return (
@@ -32,67 +57,62 @@ export default function ContactPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
             {/* Contact Information */}
             <div>
               <h2 className="text-2xl font-bold text-amber-50 mb-6">Get in Touch</h2>
-              
+
               <div className="space-y-6">
+
                 <Card className="bg-zinc-900 border-amber-900/20">
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
-                      <div className="bg-amber-900/20 p-3 rounded-full border border-amber-700/30">
-                        <MapPin className="h-6 w-6 text-amber-500" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-amber-50 mb-1">Address</h3>
-                        <p className="text-amber-50/70">21 Market Street, Downtown</p>
-                      </div>
+                  <CardContent className="p-6 flex items-start gap-4">
+                    <div className="bg-amber-900/20 p-3 rounded-full border border-amber-700/30">
+                      <MapPin className="h-6 w-6 text-amber-500" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-amber-50 mb-1">Address</h3>
+                      <p className="text-amber-50/70">21 Market Street, Downtown</p>
                     </div>
                   </CardContent>
                 </Card>
 
                 <Card className="bg-zinc-900 border-amber-900/20">
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
-                      <div className="bg-amber-900/20 p-3 rounded-full border border-amber-700/30">
-                        <Phone className="h-6 w-6 text-amber-500" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-amber-50 mb-1">Phone</h3>
-                        <p className="text-amber-50/70">+1 202 555 0147</p>
-                      </div>
+                  <CardContent className="p-6 flex items-start gap-4">
+                    <div className="bg-amber-900/20 p-3 rounded-full border border-amber-700/30">
+                      <Phone className="h-6 w-6 text-amber-500" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-amber-50 mb-1">Phone</h3>
+                      <p className="text-amber-50/70">+1 202 555 0147</p>
                     </div>
                   </CardContent>
                 </Card>
 
                 <Card className="bg-zinc-900 border-amber-900/20">
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
-                      <div className="bg-amber-900/20 p-3 rounded-full border border-amber-700/30">
-                        <Mail className="h-6 w-6 text-amber-500" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-amber-50 mb-1">Email</h3>
-                        <p className="text-amber-50/70">hello@midnightbrew.demo</p>
-                      </div>
+                  <CardContent className="p-6 flex items-start gap-4">
+                    <div className="bg-amber-900/20 p-3 rounded-full border border-amber-700/30">
+                      <Mail className="h-6 w-6 text-amber-500" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-amber-50 mb-1">Email</h3>
+                      <p className="text-amber-50/70">hello@midnightbrew.demo</p>
                     </div>
                   </CardContent>
                 </Card>
 
                 <Card className="bg-zinc-900 border-amber-900/20">
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
-                      <div className="bg-amber-900/20 p-3 rounded-full border border-amber-700/30">
-                        <Clock className="h-6 w-6 text-amber-500" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-amber-50 mb-1">Hours</h3>
-                        <p className="text-amber-50/70">Mon–Fri: 8am – 11pm</p>
-                        <p className="text-amber-50/70">Sat–Sun: 9am – 1am</p>
-                      </div>
+                  <CardContent className="p-6 flex items-start gap-4">
+                    <div className="bg-amber-900/20 p-3 rounded-full border border-amber-700/30">
+                      <Clock className="h-6 w-6 text-amber-500" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-amber-50 mb-1">Hours</h3>
+                      <p className="text-amber-50/70">Mon–Fri: 8am – 11pm</p>
+                      <p className="text-amber-50/70">Sat–Sun: 9am – 1am</p>
                     </div>
                   </CardContent>
                 </Card>
+
               </div>
             </div>
 
@@ -101,14 +121,13 @@ export default function ContactPage() {
               <Card className="bg-zinc-900 border-amber-900/20">
                 <CardContent className="p-8">
                   <h2 className="text-2xl font-bold text-amber-50 mb-6">Send Us a Message</h2>
+
                   <form onSubmit={handleSubmit} className="space-y-6">
+
                     <div>
-                      <label htmlFor="name" className="block text-amber-50 mb-2 font-medium">
-                        Name
-                      </label>
+                      <label className="block text-amber-50 mb-2 font-medium">Name</label>
                       <Input
-                        id="name"
-                        type="text"
+                        name="name"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         required
@@ -117,11 +136,9 @@ export default function ContactPage() {
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-amber-50 mb-2 font-medium">
-                        Email
-                      </label>
+                      <label className="block text-amber-50 mb-2 font-medium">Email</label>
                       <Input
-                        id="email"
+                        name="email"
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -131,26 +148,30 @@ export default function ContactPage() {
                     </div>
 
                     <div>
-                      <label htmlFor="message" className="block text-amber-50 mb-2 font-medium">
-                        Message
-                      </label>
+                      <label className="block text-amber-50 mb-2 font-medium">Message</label>
                       <Textarea
-                        id="message"
+                        name="message"
+                        rows={6}
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         required
-                        rows={6}
                         className="bg-zinc-950 border-amber-900/20 text-amber-50"
                       />
                     </div>
 
-                    <Button type="submit" className="w-full bg-amber-600 hover:bg-amber-700 text-white">
-                      Send Message
+                    <Button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full bg-amber-600 hover:bg-amber-700 text-white"
+                    >
+                      {loading ? "Sending..." : "Send Message"}
                     </Button>
+
                   </form>
                 </CardContent>
               </Card>
             </div>
+
           </div>
         </div>
       </div>
