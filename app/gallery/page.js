@@ -12,7 +12,7 @@ export default function GalleryPage() {
     { id: 1, url: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800', alt: 'Coffee brewing' },
     { id: 2, url: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800', alt: 'Coffee art' },
     { id: 3, url: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800', alt: 'Coffee beans' },
-    { id: 4, url: 'https://images.unsplash.com/photo-1501492673258-8e6e4b5a4b2e?w=800', alt: 'Cafe interior' },
+    { id: 4, url: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Cafe interior' },
     { id: 5, url: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800', alt: 'Pastries' },
     { id: 6, url: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800', alt: 'Coffee cup' },
     { id: 7, url: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800', alt: 'Breakfast' },
