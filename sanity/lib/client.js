@@ -17,10 +17,7 @@ export function urlFor(source) {
 }
 
 export async function sanityFetch(query, params = {}) {
-  try {
-    return await client.fetch(query, params)
-  } catch (error) {
-    console.error('Sanity fetch error:', error)
-    return null
-  }
+  return client.fetch(query, params, {
+    next: { revalidate: 0 }
+  })
 }
